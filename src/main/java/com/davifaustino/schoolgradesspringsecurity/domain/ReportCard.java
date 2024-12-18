@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import com.davifaustino.schoolgradesspringsecurity.api.dtos.ReportCardRequest;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +27,12 @@ public class ReportCard {
     private String studentUsername;
     private String schoolYear;
     private List<String> grades;
+
+    public ReportCard(ReportCardRequest request) {
+        this.teacherUsername = request.teacherUsername();
+        this.schoolSubject = request.schoolSubject();
+        this.studentUsername = request.studentUsername();
+        this.schoolYear = request.schoolYear();
+        this.grades = request.grades();
+    }
 }

@@ -16,4 +16,10 @@ public class ReportCardService {
             throw new RecordConflictException("Report Card already exists in the table");
         }
     }
+
+    public void saveReportCard(ReportCard reportCard) {
+        existsByCompositeKey(reportCard.getTeacherUsername(), reportCard.getSchoolSubject().toString(), reportCard.getStudentUsername(), reportCard.getSchoolYear());
+
+        reportCardRepository.save(reportCard);
+    }
 }
