@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,5 +46,12 @@ public class ReportCardController {
         List<ReportCardResponse> reportCardResponses = reportCardService.getReportCardsByStudentUsername(username).stream().map(ReportCardResponse::new).toList();
 
         return ResponseEntity.ok().body(reportCardResponses);
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> updateReportCard(@RequestBody @Valid ReportCardRequest body, @RequestParam String id) {
+        reportCardService.updateReportCard(new ReportCard(body), id);
+
+        return ResponseEntity.accepted().build();
     }
 }

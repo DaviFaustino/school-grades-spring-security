@@ -1,6 +1,7 @@
 package com.davifaustino.schoolgradesspringsecurity.domain;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,17 @@ public class ReportCardService {
 
     public List<ReportCard> getReportCardsByStudentUsername(String studentUsername) {
         return reportCardRepository.findReportCardsByStudentUsername(studentUsername);
+    }
+
+    public void updateReportCard(ReportCard reportCard, String id) {
+        UUID uuid = UUID.fromString(id);
+        if (reportCardRepository.existsById(uuid)) {
+            reportCard.setId(UUID.fromString(id));
+        } else {
+            throw new NonExistingRecordException("Report card with the provided id does not exist");
+        }
+
+        existsByCompositeKey(reportCard.getTeacherUsername(), reportCard.getSchoolSubject().toString(), reportCard.getStudentUsername(), reportCard.getSchoolYear());
+        reportCardRepository.save(reportCard);
     }
 }
