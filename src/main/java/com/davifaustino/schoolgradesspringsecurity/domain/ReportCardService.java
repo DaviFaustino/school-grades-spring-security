@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.NonExistingRecordException;
+import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.RecordConflictException;
 import com.davifaustino.schoolgradesspringsecurity.infrastructure.ReportCardRepository;
 
 @Service
