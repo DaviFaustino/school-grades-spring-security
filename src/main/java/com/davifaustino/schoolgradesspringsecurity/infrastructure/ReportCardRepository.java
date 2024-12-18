@@ -14,4 +14,6 @@ public interface ReportCardRepository extends CrudRepository<ReportCard, UUID> {
     boolean existsByTeacherUsernameAndSchoolSubjectAndStudentUsernameAndSchoolYear(String teacherUsername, String schoolSubject, String studentUsername, String schoolYear);
     
     List<ReportCard> findReportCardsByTeacherUsername(String teacherUsername);
+
+    List<ReportCard> findReportCardsByStudentUsername(String studentUsername);
 }

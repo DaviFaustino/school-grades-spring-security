@@ -39,4 +39,11 @@ public class ReportCardController {
 
         return ResponseEntity.ok().body(reportCardResponses);
     }
+    
+    @GetMapping("/student")
+    public ResponseEntity<List<ReportCardResponse>> getReportCardsByStudentUsername(@RequestParam String username) {
+        List<ReportCardResponse> reportCardResponses = reportCardService.getReportCardsByStudentUsername(username).stream().map(ReportCardResponse::new).toList();
+
+        return ResponseEntity.ok().body(reportCardResponses);
+    }
 }

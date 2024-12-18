@@ -28,4 +28,8 @@ public class ReportCardService {
     public List<ReportCard> getReportCardsByTeacherUsername(String teacherUsername) {
         return reportCardRepository.findReportCardsByTeacherUsername(teacherUsername);
     }
+
+    public List<ReportCard> getReportCardsByStudentUsername(String studentUsername) {
+        return reportCardRepository.findReportCardsByStudentUsername(studentUsername);
+    }
 }
