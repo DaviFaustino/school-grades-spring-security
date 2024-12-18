@@ -1,5 +1,7 @@
 package com.davifaustino.schoolgradesspringsecurity.domain;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,9 @@ public class ReportCardService {
         existsByCompositeKey(reportCard.getTeacherUsername(), reportCard.getSchoolSubject().toString(), reportCard.getStudentUsername(), reportCard.getSchoolYear());
 
         reportCardRepository.save(reportCard);
+    }
+
+    public List<ReportCard> getReportCardsByTeacherUsername(String teacherUsername) {
+        return reportCardRepository.findReportCardsByTeacherUsername(teacherUsername);
     }
 }
