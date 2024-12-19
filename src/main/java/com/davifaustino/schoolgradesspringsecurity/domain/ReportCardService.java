@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.NonExistingRecordException;
 import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.RecordConflictException;
 import com.davifaustino.schoolgradesspringsecurity.infrastructure.ReportCardRepository;
+import com.davifaustino.schoolgradesspringsecurity.infrastructure.UserRepository;
 
 @Service
 public class ReportCardService {
@@ -17,7 +18,18 @@ public class ReportCardService {
     @Autowired
     private ReportCardRepository reportCardRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    public void existByUsernames(String teacherUsername, String studentUsername) {
+        if (!userRepository.existsById(teacherUsername))
+            throw new NonExistingRecordException("Teacher username provided does not exist");
+        if (!userRepository.existsById(studentUsername))
+            throw new NonExistingRecordException("Student username provided does not exist");
+    }
+
     public void saveReportCard(ReportCard reportCard) {
+        existByUsernames(reportCard.getTeacherUsername(), reportCard.getStudentUsername());
         Optional<UUID> id = reportCardRepository.findIdByCompositeKey(reportCard.getTeacherUsername(),
                                                                     reportCard.getSchoolSubject().toString(),
                                                                     reportCard.getStudentUsername(),
@@ -44,6 +56,7 @@ public class ReportCardService {
             throw new NonExistingRecordException("Report card with the provided id does not exist");
         }
 
+        existByUsernames(reportCard.getTeacherUsername(), reportCard.getStudentUsername());
         Optional<UUID> existingId = reportCardRepository.findIdByCompositeKey(reportCard.getTeacherUsername(),
                                                                             reportCard.getSchoolSubject().toString(),
                                                                             reportCard.getStudentUsername(),
