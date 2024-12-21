@@ -19,6 +19,7 @@ public class SecurityConfig {
                             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                             .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.GET, "/report-card/student").hasRole("STUDENT")
+                                .requestMatchers(HttpMethod.POST, "/authentication/register").hasRole("ADMIN")
                                 .anyRequest().hasRole("TEACHER"))
                             .httpBasic(Customizer.withDefaults())
                             .build();
