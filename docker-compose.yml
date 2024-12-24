@@ -26,7 +26,7 @@ services:
 
     app:
         build: .
-        image: school-grades-sec:1.0
+        image: school-grades-sec:2.0
         container_name: app-school-grades-sec
         networks:
             - school-grades-sec
