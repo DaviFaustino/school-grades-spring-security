@@ -1,4 +1,4 @@
-package com.davifaustino.schoolgradesspringsecurity.api;
+package com.davifaustino.schoolgradesspringsecurity.api.controllers;
 
 import java.net.URI;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.davifaustino.schoolgradesspringsecurity.api.dtos.UserRequest;
-import com.davifaustino.schoolgradesspringsecurity.domain.AuthenticationService;
-import com.davifaustino.schoolgradesspringsecurity.domain.User;
+import com.davifaustino.schoolgradesspringsecurity.domain.entities.User;
+import com.davifaustino.schoolgradesspringsecurity.domain.services.AuthenticationService;
 
 import jakarta.validation.Valid;
 

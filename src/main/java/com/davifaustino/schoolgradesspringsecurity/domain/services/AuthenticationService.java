@@ -1,4 +1,4 @@
-package com.davifaustino.schoolgradesspringsecurity.domain;
+package com.davifaustino.schoolgradesspringsecurity.domain.services;
 
 import java.time.Instant;
 import java.util.stream.Collectors;
@@ -12,8 +12,9 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.davifaustino.schoolgradesspringsecurity.domain.entities.User;
 import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.RecordConflictException;
-import com.davifaustino.schoolgradesspringsecurity.infrastructure.UserRepository;
+import com.davifaustino.schoolgradesspringsecurity.infrastructure.repositories.UserRepository;
 
 @Service
 public class AuthenticationService {

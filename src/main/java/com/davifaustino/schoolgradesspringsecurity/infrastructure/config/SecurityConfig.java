@@ -1,4 +1,4 @@
-package com.davifaustino.schoolgradesspringsecurity.infrastructure;
+package com.davifaustino.schoolgradesspringsecurity.infrastructure.config;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;

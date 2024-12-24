@@ -2,7 +2,7 @@ package com.davifaustino.schoolgradesspringsecurity.api.dtos;
 
 import java.util.List;
 
-import com.davifaustino.schoolgradesspringsecurity.domain.SchoolSubject;
+import com.davifaustino.schoolgradesspringsecurity.domain.enums.SchoolSubject;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -1,4 +1,4 @@
-package com.davifaustino.schoolgradesspringsecurity.domain;
+package com.davifaustino.schoolgradesspringsecurity.domain.entities;
 
 import java.util.List;
 import java.util.UUID;
@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import com.davifaustino.schoolgradesspringsecurity.api.dtos.ReportCardRequest;
+import com.davifaustino.schoolgradesspringsecurity.domain.enums.SchoolSubject;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

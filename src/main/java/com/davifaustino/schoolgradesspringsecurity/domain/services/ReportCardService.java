@@ -1,4 +1,4 @@
-package com.davifaustino.schoolgradesspringsecurity.domain;
+package com.davifaustino.schoolgradesspringsecurity.domain.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,10 +7,11 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.davifaustino.schoolgradesspringsecurity.domain.entities.ReportCard;
 import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.NonExistingRecordException;
 import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.RecordConflictException;
-import com.davifaustino.schoolgradesspringsecurity.infrastructure.ReportCardRepository;
-import com.davifaustino.schoolgradesspringsecurity.infrastructure.UserRepository;
+import com.davifaustino.schoolgradesspringsecurity.infrastructure.repositories.ReportCardRepository;
+import com.davifaustino.schoolgradesspringsecurity.infrastructure.repositories.UserRepository;
 
 @Service
 public class ReportCardService {

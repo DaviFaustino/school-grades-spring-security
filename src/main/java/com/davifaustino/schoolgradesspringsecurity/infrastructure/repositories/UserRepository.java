@@ -1,11 +1,11 @@
-package com.davifaustino.schoolgradesspringsecurity.infrastructure;
+package com.davifaustino.schoolgradesspringsecurity.infrastructure.repositories;
 
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import com.davifaustino.schoolgradesspringsecurity.domain.User;
+import com.davifaustino.schoolgradesspringsecurity.domain.entities.User;
 
 public interface UserRepository extends CrudRepository<User, String> {
     

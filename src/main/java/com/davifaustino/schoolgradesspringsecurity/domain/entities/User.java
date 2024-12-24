@@ -1,4 +1,4 @@
-package com.davifaustino.schoolgradesspringsecurity.domain;
+package com.davifaustino.schoolgradesspringsecurity.domain.entities;
 
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.davifaustino.schoolgradesspringsecurity.api.dtos.UserRequest;
+import com.davifaustino.schoolgradesspringsecurity.domain.enums.UserRole;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

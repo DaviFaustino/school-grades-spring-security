@@ -1,6 +1,6 @@
 package com.davifaustino.schoolgradesspringsecurity.api.dtos;
 
-import com.davifaustino.schoolgradesspringsecurity.domain.UserRole;
+import com.davifaustino.schoolgradesspringsecurity.domain.enums.UserRole;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

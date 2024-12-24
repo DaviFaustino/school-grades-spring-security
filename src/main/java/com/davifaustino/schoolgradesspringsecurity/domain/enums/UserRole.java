@@ -1,4 +1,4 @@
-package com.davifaustino.schoolgradesspringsecurity.domain;
+package com.davifaustino.schoolgradesspringsecurity.domain.enums;
 
 public enum UserRole {
     ADMIN("admin"),

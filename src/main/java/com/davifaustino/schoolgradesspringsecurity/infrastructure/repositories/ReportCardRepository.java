@@ -1,4 +1,4 @@
-package com.davifaustino.schoolgradesspringsecurity.infrastructure;
+package com.davifaustino.schoolgradesspringsecurity.infrastructure.repositories;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.davifaustino.schoolgradesspringsecurity.domain.ReportCard;
+import com.davifaustino.schoolgradesspringsecurity.domain.entities.ReportCard;
 
 @Repository
 public interface ReportCardRepository extends CrudRepository<ReportCard, UUID> {

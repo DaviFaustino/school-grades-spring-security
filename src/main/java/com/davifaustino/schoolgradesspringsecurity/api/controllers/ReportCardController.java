@@ -1,4 +1,4 @@
-package com.davifaustino.schoolgradesspringsecurity.api;
+package com.davifaustino.schoolgradesspringsecurity.api.controllers;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.davifaustino.schoolgradesspringsecurity.api.dtos.ReportCardRequest;
 import com.davifaustino.schoolgradesspringsecurity.api.dtos.ReportCardResponse;
-import com.davifaustino.schoolgradesspringsecurity.domain.ReportCard;
-import com.davifaustino.schoolgradesspringsecurity.domain.ReportCardService;
+import com.davifaustino.schoolgradesspringsecurity.domain.entities.ReportCard;
+import com.davifaustino.schoolgradesspringsecurity.domain.services.ReportCardService;
 
 import jakarta.validation.Valid;
 

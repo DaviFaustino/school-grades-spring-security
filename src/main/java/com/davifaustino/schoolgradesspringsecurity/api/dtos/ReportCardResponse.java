@@ -3,8 +3,8 @@ package com.davifaustino.schoolgradesspringsecurity.api.dtos;
 import java.util.List;
 import java.util.UUID;
 
-import com.davifaustino.schoolgradesspringsecurity.domain.ReportCard;
-import com.davifaustino.schoolgradesspringsecurity.domain.SchoolSubject;
+import com.davifaustino.schoolgradesspringsecurity.domain.entities.ReportCard;
+import com.davifaustino.schoolgradesspringsecurity.domain.enums.SchoolSubject;
 
 public record ReportCardResponse(UUID id,
                                 String teacherUsername,
