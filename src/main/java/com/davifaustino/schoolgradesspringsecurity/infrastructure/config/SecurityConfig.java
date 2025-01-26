@@ -47,7 +47,7 @@ public class SecurityConfig {
                             .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.GET, "/report-card/student").hasRole("STUDENT")
                                 .requestMatchers(HttpMethod.POST, "/authentication/register").hasRole("ADMIN")
-                                .requestMatchers(HttpMethod.POST, "/authentication/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/authentication/login", "/authentication/refresh").permitAll()
                                 .anyRequest().hasRole("TEACHER"))
                             .httpBasic(Customizer.withDefaults())
                             .oauth2ResourceServer(conf -> conf

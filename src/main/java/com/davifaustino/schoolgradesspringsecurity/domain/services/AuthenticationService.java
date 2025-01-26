@@ -5,16 +5,21 @@ import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.davifaustino.schoolgradesspringsecurity.domain.entities.User;
+import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.InvalidTokenException;
+import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.NonExistingRecordException;
 import com.davifaustino.schoolgradesspringsecurity.domain.exceptions.RecordConflictException;
 import com.davifaustino.schoolgradesspringsecurity.infrastructure.repositories.UserRepository;
 
@@ -26,6 +31,9 @@ public class AuthenticationService {
 
     @Autowired
     private JwtEncoder jwtEncoder;
+
+    @Autowired
+    private JwtDecoder jwtDecoder;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -69,5 +77,21 @@ public class AuthenticationService {
             .build();
         
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+    }
+
+    public String[] refreshAccessToken(String refreshToken) {
+        try {
+            Jwt jwt = jwtDecoder.decode(refreshToken);
+            String username = jwt.getSubject();
+            User user = userRepository.findById(username).orElseThrow(() -> new NonExistingRecordException(username));
+
+            Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities());
+            String newAccessToken = generateAccessToken(authentication);
+            String newRefreshToken = generateRefreshToken(authentication);
+
+            return new String[] {newAccessToken, newRefreshToken};
+        } catch (Exception e) {
+            throw new InvalidTokenException("Invalid Token");
+        }
     }
 }

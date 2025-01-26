@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.davifaustino.schoolgradesspringsecurity.api.dtos.AuthResponse;
+import com.davifaustino.schoolgradesspringsecurity.api.dtos.RefreshRequest;
 import com.davifaustino.schoolgradesspringsecurity.api.dtos.UserRequest;
 import com.davifaustino.schoolgradesspringsecurity.domain.entities.User;
 import com.davifaustino.schoolgradesspringsecurity.domain.services.AuthenticationService;
@@ -37,5 +38,12 @@ public class AuthenticationController {
         String refreshJwt = authService.generateRefreshToken(authentication);
 
         return ResponseEntity.ok(new AuthResponse(accessJwt, refreshJwt));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refreshToken(@RequestBody RefreshRequest refreshRequest) {
+        String[] tokens = authService.refreshAccessToken(refreshRequest.refreshToken());
+
+        return ResponseEntity.ok(new AuthResponse(tokens[0], tokens[1]));
     }
 }
