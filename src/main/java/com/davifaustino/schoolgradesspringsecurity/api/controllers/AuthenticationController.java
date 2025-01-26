@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.davifaustino.schoolgradesspringsecurity.api.dtos.AuthResponse;
 import com.davifaustino.schoolgradesspringsecurity.api.dtos.UserRequest;
 import com.davifaustino.schoolgradesspringsecurity.domain.entities.User;
 import com.davifaustino.schoolgradesspringsecurity.domain.services.AuthenticationService;
@@ -31,9 +32,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(Authentication authentication) {
-        String jwt = authService.generateToken(authentication);
+    public ResponseEntity<AuthResponse> loginUser(Authentication authentication) {
+        String accessJwt = authService.generateAccessToken(authentication);
+        String refreshJwt = authService.generateRefreshToken(authentication);
 
-        return ResponseEntity.ok(jwt);
+        return ResponseEntity.ok(new AuthResponse(accessJwt, refreshJwt));
     }
 }

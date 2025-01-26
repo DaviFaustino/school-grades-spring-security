@@ -1,6 +1,7 @@
 package com.davifaustino.schoolgradesspringsecurity.domain.services;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class AuthenticationService {
         userRepository.saveUser(user);
     }
 
-    public String generateToken(Authentication authentication) {
+    public String generateAccessToken(Authentication authentication) {
         Instant now = Instant.now();
 
         String scope = authentication
@@ -52,6 +53,19 @@ public class AuthenticationService {
             .expiresAt(now.plusSeconds(3600l))
             .subject(authentication.getName())
             .claim("scope", scope)
+            .build();
+        
+        return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+    }
+
+    public String generateRefreshToken(Authentication authentication) {
+        Instant now = Instant.now();
+        
+        JwtClaimsSet claims = JwtClaimsSet.builder()
+            .issuer("school-grades-spring-security")
+            .issuedAt(now)
+            .expiresAt(now.plus(7, ChronoUnit.DAYS))
+            .subject(authentication.getName())
             .build();
         
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
