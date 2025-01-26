@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -26,11 +26,14 @@ public class AuthenticationService {
     @Autowired
     private JwtEncoder jwtEncoder;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
     public void registerUser(User user) {
         if (userRepository.existsById(user.getUsername())) throw new RecordConflictException("Username already exists");
 
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.saveUser(user);
     }
 
