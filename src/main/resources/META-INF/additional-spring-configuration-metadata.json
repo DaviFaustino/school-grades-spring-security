@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "jwt.expiration-time.access",
+    "type": "java.lang.Long",
+    "description": "Access token expiration time"
+  },
+  {
+    "name": "jwt.expiration-time.refresh",
+    "type": "java.lang.Long",
+    "description": "Refresh token expiration time"
+  }
+]}

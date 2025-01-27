@@ -1,10 +1,10 @@
 package com.davifaustino.schoolgradesspringsecurity.domain.services;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,6 +38,12 @@ public class AuthenticationService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Value("${jwt.expiration-time.access}")
+    private Long accessTokenExpirationTime;
+
+    @Value("${jwt.expiration-time.refresh}")
+    private Long refreshTokenExpirationTime;
+
     @Transactional
     public void registerUser(User user) {
         if (userRepository.existsById(user.getUsername())) throw new RecordConflictException("Username already exists");
@@ -58,7 +64,7 @@ public class AuthenticationService {
         JwtClaimsSet claims = JwtClaimsSet.builder()
             .issuer("school-grades-spring-security")
             .issuedAt(now)
-            .expiresAt(now.plusSeconds(3600l))
+            .expiresAt(now.plusSeconds(accessTokenExpirationTime))
             .subject(authentication.getName())
             .claim("scope", scope)
             .build();
@@ -72,7 +78,7 @@ public class AuthenticationService {
         JwtClaimsSet claims = JwtClaimsSet.builder()
             .issuer("school-grades-spring-security")
             .issuedAt(now)
-            .expiresAt(now.plus(7, ChronoUnit.DAYS))
+            .expiresAt(now.plusSeconds(refreshTokenExpirationTime))
             .subject(authentication.getName())
             .build();
         
